@@ -27,8 +27,8 @@ hillclimbcontroller/
 ├── requirements.txt
 ├── README.md       ← Full GitHub-ready README
 ├── .gitignore
-├── assets/         ← Place banner.png / demo.gif here
-└── docs/           ← Architecture docs
+├── Screen Recording 2026-07-11 223204.mp4   ← Demo recording
+└── Screen Recording 2026-07-12 121530.mp4   ← Demo recording
 ```
 
 ---
