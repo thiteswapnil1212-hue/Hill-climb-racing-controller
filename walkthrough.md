@@ -37,11 +37,9 @@ hillclimbcontroller/
 
 | Gesture | Key | Game Action |
 |:---:|:---:|---|
-| 👍 Thumb Up | `→` Right | Accelerate |
-| ✊ Fist | `←` Left | Brake |
-| ✋ Open Palm | *(release)* | Release all |
-| ✌️ Peace | `P` | Pause |
-| 👎 Thumb Down | `R` | Restart |
+| ✋ Open Palm | `→` Right (held) | Accelerate |
+| ✊ Fist | `←` Left (held) | Brake |
+| ✌️ Peace | `P` (tap) | Pause |
 
 ---
 
