@@ -40,7 +40,7 @@ class KeyController:
     Rules:
     - Arrow-type keys (right/left) are *held* while gesture is active.
     - Character keys (p, r) are *tapped* (pressed and immediately released).
-    - OPEN_PALM releases all held keys.
+    - OPEN_PALM holds the Right arrow (accelerate).
     - If no hand is detected (gesture = UNKNOWN), all keys are released.
     """
 
