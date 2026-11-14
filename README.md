@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![GesturePilot AI](assets/banner.png)
-
 **Control games with your bare hands — no controller needed.**
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://python.org)
@@ -28,7 +26,7 @@ Powered by **Google MediaPipe**, it detects 21 hand landmarks per frame at 30+ F
 | Feature | Description |
 |---|---|
 | 🖐 Real-time Detection | 21-landmark hand tracking via MediaPipe at 30+ FPS |
-| 🎯 5 Gesture Controls | Thumb Up, Fist, Open Palm, Peace, Thumb Down |
+| 🎯 3 Gesture Controls | Open Palm, Fist, Peace |
 | ⌨️ Keyboard Injection | pynput holds/taps keys exactly as a real keyboard would |
 | 🧠 Gesture Smoothing | Debounce buffer prevents jitter and accidental keypresses |
 | 📊 Live HUD | FPS, confidence %, gesture label, active key — all on screen |
@@ -43,11 +41,9 @@ Powered by **Google MediaPipe**, it detects 21 hand landmarks per frame at 30+ F
 
 | Gesture | Symbol | Key Sent | Game Action |
 |---|:---:|:---:|---|
-| Thumb Up | 👍 | `→` Right Arrow | **Accelerate** |
-| Closed Fist | ✊ | `←` Left Arrow | **Brake / Reverse** |
-| Open Palm | ✋ | *(release)* | **Release all keys** |
-| Peace / Victory | ✌️ | `P` | **Pause** |
-| Thumb Down | 👎 | `R` | **Restart** |
+| Open Palm | ✋ | `→` Right Arrow (held) | **Accelerate** |
+| Closed Fist | ✊ | `←` Left Arrow (held) | **Brake / Reverse** |
+| Peace / Victory | ✌️ | `P` (tap) | **Pause** |
 
 ---
 
@@ -65,8 +61,8 @@ Powered by **Google MediaPipe**, it detects 21 hand landmarks per frame at 30+ F
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/GesturePilot-AI.git
-cd GesturePilot-AI
+git clone https://github.com/thiteswapnil1212-hue/Hill-climb-racing-controller.git
+cd Hill-climb-racing-controller
 ```
 
 ### 2. Create a virtual environment (recommended)
