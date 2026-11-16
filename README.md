@@ -102,11 +102,10 @@ TRACKING_CONFIDENCE  = 0.75
 
 # Map gestures to any keys for any game
 KEY_MAP = {
-    "THUMB_UP"   : "right",   # Accelerate
-    "FIST"       : "left",    # Brake
-    "OPEN_PALM"  : None,      # Release all
-    "PEACE"      : "p",       # Pause
-    "THUMB_DOWN" : "r",       # Restart
+    "OPEN_PALM"  : "right",   # Accelerate (held)
+    "FIST"       : "left",    # Brake / Reverse (held)
+    "PEACE"      : "p",       # Pause (tap)
+    "UNKNOWN"    : None,      # No key
 }
 
 # Gesture smoothing: 1 = most responsive, 10 = strictest
@@ -118,11 +117,9 @@ GESTURE_SENSITIVITY = 5
 Just update `KEY_MAP`. Example for **Need for Speed (web)**:
 ```python
 KEY_MAP = {
-    "THUMB_UP"   : "up",
+    "OPEN_PALM"  : "up",
     "FIST"       : "down",
-    "OPEN_PALM"  : None,
     "PEACE"      : "space",   # handbrake
-    "THUMB_DOWN" : "r",
 }
 ```
 
@@ -138,30 +135,18 @@ GesturePilot-AI/
 ├── controller.py   ← KeyController: pynput keyboard state machine
 ├── config.py       ← All tunable constants (key map, camera, sensitivity, colors)
 ├── requirements.txt
-├── README.md
-├── assets/         ← Banner image, demo GIF
-└── docs/           ← Architecture diagrams, additional documentation
+└── README.md
 ```
 
 ### Data Flow
 
-```
-Webcam Frame
-    │
-    ▼
-HandDetector.process()          ← MediaPipe Hands (21 landmarks)
-    │  HandResult (landmarks, confidence, bbox)
-    ▼
-GestureRecognizer.recognize()   ← Geometric rules + debounce buffer
-    │  gesture string ("THUMB_UP", "FIST", …)
-    ▼
-KeyController.update()          ← pynput: hold / tap / release keys
-    │  active_key_name (for HUD)
-    ▼
-draw_hud()                      ← OpenCV overlay (FPS, gesture, key, sensitivity)
-    │
-    ▼
-cv2.imshow()                    ← Display
+```mermaid
+flowchart TD
+    Cam([Webcam frame]) --> HD["HandDetector.process()<br/>MediaPipe Hands · 21 landmarks"]
+    HD --> GR["GestureRecognizer.recognize()<br/>geometric rules + debounce buffer"]
+    GR --> KC["KeyController.update()<br/>pynput · hold / tap / release"]
+    KC --> HUD["draw_hud()<br/>OpenCV overlay · FPS · gesture · key"]
+    HUD --> Show["cv2.imshow()<br/>display"]
 ```
 
 ---
@@ -181,9 +166,9 @@ cv2.imshow()                    ← Display
 
 1. **Capture** — OpenCV reads frames from your webcam at native resolution.
 2. **Detect** — MediaPipe Hands locates 21 skeletal keypoints on your hand in each frame.
-3. **Classify** — Geometric rules (finger extension, thumb direction, landmark distances) map landmark positions to one of five gestures.
+3. **Classify** — Geometric rules (finger extension, thumb direction, landmark distances) map landmark positions to one of three gestures.
 4. **Smooth** — A debounce buffer requires a gesture to appear in N consecutive frames before it is confirmed, eliminating jitter.
-5. **Control** — pynput holds or taps the appropriate OS key. Held keys (arrows) stay pressed while the gesture is maintained; tap keys (P, R) fire once per gesture change.
+5. **Control** — pynput holds or taps the appropriate OS key. Held keys (arrows) stay pressed while the gesture is maintained; tap key (P) fires once per gesture change.
 6. **Display** — A semi-transparent HUD panel renders FPS, confidence, current gesture, and active key.
 
 ---
@@ -223,7 +208,8 @@ cv2.imshow()                    ← Display
 
 ## 🎬 Demo Video
 
-> *Add a demo GIF or YouTube link here.*
+- [Screen recording — 11 Jul 2026](Screen%20Recording%202026-07-11%20223204.mp4)
+- [Screen recording — 12 Jul 2026](Screen%20Recording%202026-07-12%20121530.mp4)
 
 ---
 
